@@ -1,0 +1,30 @@
+
+name: MiniBlox Auto Extract
+
+on:
+  push:
+    paths:
+      - 'miniblox-server.zip'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Extract ZIP
+        run: |
+          unzip -o miniblox-server.zip -d .
+          test -f package.json || exit 1
+
+      - name: Commit Extracted Files
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Auto extract MiniBlox Server" || exit 0
+          git push
