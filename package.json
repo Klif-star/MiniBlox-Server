@@ -1,0 +1,6 @@
+{
+  "name": "miniblox-server",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Server perantara MiniBlox Studio (Creator Store + avatar Roblox)"
+}
